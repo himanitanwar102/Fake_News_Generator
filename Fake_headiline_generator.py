@@ -1,51 +1,50 @@
-# 1 - import the random module
 import random
 
-# 2 - create subjects
-subjects = [
-    "Shahrukh Khan",
-    "Virat Kohli",
-    "Nirmala Sitharaman",
-    "Prime Minister",
-    "Salman Khan",
-    "Pakistan people",
-    "Group of Monkeys"
-]
+# Categories with data
+data = {
+    "funny": {
+        "subjects": ["Group of Monkeys", "A Cat", "School Teacher", "Funny Youtuber"],
+        "actions": ["dances with", "eats", "runs behind", "laughs at"],
+        "places": ["a pizza", "a mirror", "inside classroom", "on the road"]
+    },
+    "political": {
+        "subjects": ["Prime Minister", "Opposition Leader", "Government"],
+        "actions": ["announces", "criticizes", "approves"],
+        "places": ["new policy", "budget plan", "public scheme"]
+    },
+    "sports": {
+        "subjects": ["Virat Kohli", "Indian Team", "Cricket Coach"],
+        "actions": ["wins", "loses", "celebrates"],
+        "places": ["the final match", "IPL trophy", "practice session"]
+    }
+}
 
-actions = [
-    "launches",
-    "orders",
-    "dances with",
-    "eats",
-    "declares war on",
-    "celebrates",
-    "sings with"
-]
+print("📰 Fake News Headline Generator")
+print("Choose category: funny / political / sports")
 
+category = input("Enter category: ").lower().strip()
 
+# Default category handling
+if category not in data:
+    print("Invalid category, defaulting to funny.")
+    category = "funny"
 
-places_or_things = [
-    "Delhi pollution",
-    "a plate of samosa",
-    "inside parliament",
-    "at India Gate",
-    "during IPL match",
-    "at Ganga Ghat",
-    "at Rajwada Palace in Indore"
-]
+count = 0  # headline counter
 
-# 3 - start the headline generation loop
 while True:
-    subject = random.choice(subjects)
-    action = random.choice(actions)
-    place_or_thing = random.choice(places_or_things)
+    subject = random.choice(data[category]["subjects"])
+    action = random.choice(data[category]["actions"])
+    place = random.choice(data[category]["places"])
 
-    headline = f"BREAKING NEWS: {subject} {action} {place_or_thing}"
+    headline = f"BREAKING NEWS: {subject} {action} {place}"
     print("\n" + headline)
 
-    user_input = input("\nDo you want another headline? (yes/no)").strip().lower()
-    if user_input == "no":
+    count += 1
+
+    choice = input("\nGenerate another headline? (yes/no): ").strip().lower()
+    if choice == "no":
         break
 
-# print goodbye message
-print("\nThanks for using the Fake News Headline Generator. Have a fun day!")
+print(f"\nTotal headlines generated: {count}")
+print("Thanks for using the Fake News Headline Generator 😊")
+
